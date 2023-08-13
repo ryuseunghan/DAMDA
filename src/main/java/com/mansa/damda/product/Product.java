@@ -5,6 +5,7 @@ import com.mansa.damda.market.Market;
 import com.mansa.damda.store.Store;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,6 +30,7 @@ public class Product {
     @Column(name = "stock_quantity")
     private Integer stockQuantity;
 
+    @CreatedDate
     @Column(name = "create_date")
     private LocalDateTime createDate;
 

@@ -1,7 +1,5 @@
 package com.mansa.damda.largelocation;
 
-import com.mansa.damda.user.User;
-import com.mansa.damda.user.UserLoginDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

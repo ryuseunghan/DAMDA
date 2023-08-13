@@ -1,6 +1,7 @@
 package com.mansa.damda.user;
 
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;

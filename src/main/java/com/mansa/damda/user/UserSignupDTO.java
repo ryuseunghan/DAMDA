@@ -11,7 +11,7 @@ public class UserSignupDTO {
 
     private String password;
 
-    private String userType;
+    private String phoneNumber;
 
     private Long marketId;
 }

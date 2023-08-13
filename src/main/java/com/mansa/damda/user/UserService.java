@@ -2,6 +2,7 @@ package com.mansa.damda.user;
 
 
 import com.mansa.damda.market.MarketRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,10 @@ public class UserService {
         user.setUserName(userSignupDTO.getUserName());
         user.setPassword(userSignupDTO.getPassword());
         user.setEmail(userSignupDTO.getEmail());
-        user.setUserType(userSignupDTO.getUserType());
+        user.setPhoneNumber(userSignupDTO.getPhoneNumber());
         user.setMarket(marketRepository.findById(userSignupDTO.getMarketId())
                 .orElseThrow(() -> new IllegalArgumentException("시장 미입력 오류")));
+        user.setAccount("");
 
         userRepository.save(user);
     }
