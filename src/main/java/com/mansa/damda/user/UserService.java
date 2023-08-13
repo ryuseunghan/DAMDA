@@ -14,6 +14,11 @@ public class UserService {
 
     @Transactional
     public void create(UserSignupDTO userSignupDTO){
+        //중복 사용자 처리
+        if (userRepository.existsByUserName(userSignupDTO.getUserName())) {
+            throw new IllegalArgumentException("이미 사용 중인 사용자명입니다.");
+        }
+        //사용자 등록
         User user = new User();
         user.setUserName(userSignupDTO.getUserName());
         user.setPassword(userSignupDTO.getPassword());
