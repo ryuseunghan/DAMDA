@@ -1,16 +1,13 @@
 package com.mansa.damda.market;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/markets")
 public class MarketController {
-    @PostMapping("/select")
+    @GetMapping("/select")
     public SelectMarketDTO selectMarket(@RequestBody SelectMarketDTO selectMarketDTO){
         return selectMarketDTO;
     }

@@ -21,8 +21,6 @@ public class User {
     @Column(name ="user_name")
     private String userName;
 
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "password")
     private String password;
@@ -30,8 +28,14 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "account")
-    private String account;
+    @Column(name = "account_name")
+    private String accountName;
+
+    @Column(name = "account_digit")
+    private Integer accountDigit;
+
+    @Column(name = "account_bank")
+    private String accountBank;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "market_id")

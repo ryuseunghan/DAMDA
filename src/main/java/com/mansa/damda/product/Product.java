@@ -28,7 +28,7 @@ public class Product {
     private BigDecimal price;
 
     @Column(name = "stock_quantity")
-    private Integer stockQuantity;
+    private BigDecimal stockQuantity;
 
     @CreatedDate
     @Column(name = "create_date")

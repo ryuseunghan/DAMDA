@@ -2,6 +2,8 @@ package com.mansa.damda.order;
 
 import com.mansa.damda.product.Product;
 import com.mansa.damda.user.User;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import javax.persistence.*;
@@ -10,20 +12,22 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
+@Setter
+@Getter
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long orderId;
 
-    @Column(name = "order_status")
-    private String orderStatus;
-
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 
     @Column(name = "order_amount")
     private BigDecimal orderAmount;
+
+    @Column(name = "order_price")
+    private BigDecimal orderPrice;
 
     @OneToOne
     @JoinColumn(name = "product_id")
@@ -32,9 +36,5 @@ public class Order {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    public Order(Long orderId) {
-        this.orderId = orderId;
-    }
 
 }

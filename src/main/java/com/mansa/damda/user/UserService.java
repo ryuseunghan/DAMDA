@@ -23,11 +23,12 @@ public class UserService {
         User user = new User();
         user.setUserName(userSignupDTO.getUserName());
         user.setPassword(userSignupDTO.getPassword());
-        user.setEmail(userSignupDTO.getEmail());
         user.setPhoneNumber(userSignupDTO.getPhoneNumber());
         user.setMarket(marketRepository.findById(userSignupDTO.getMarketId())
-                .orElseThrow(() -> new IllegalArgumentException("시장 미입력 오류")));
-        user.setAccount("");
+                .orElseThrow(() -> new IllegalArgumentException("시장 오류")));
+        user.setAccountBank("");
+        user.setAccountDigit(0);
+        user.setAccountName("");
 
         userRepository.save(user);
     }
