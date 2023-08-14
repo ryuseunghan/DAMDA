@@ -59,7 +59,7 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
-    /*@Bean
+    @Bean
     public Docket marketApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("MarketAPI")
@@ -79,7 +79,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());
-    }*/
+    }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
