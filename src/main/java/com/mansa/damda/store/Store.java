@@ -4,6 +4,7 @@ package com.mansa.damda.store;
 import com.mansa.damda.category.Category;
 import com.mansa.damda.market.Market;
 import com.mansa.damda.user.User;
+import io.swagger.annotations.Api;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "stores")
+@Api(tags = "stores API")
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

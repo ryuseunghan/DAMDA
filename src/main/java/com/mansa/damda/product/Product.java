@@ -3,6 +3,7 @@ package com.mansa.damda.product;
 import com.mansa.damda.category.Category;
 import com.mansa.damda.market.Market;
 import com.mansa.damda.store.Store;
+import io.swagger.annotations.Api;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "products")
+@Api(tags = "products API")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
