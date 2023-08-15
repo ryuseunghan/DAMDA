@@ -1,13 +1,14 @@
 package com.mansa.damda.user;
 
 
+import com.mansa.damda.order.PurchaseHistoryDTO;
+import com.mansa.damda.product.ProductUpdateDTO;
 import io.swagger.annotations.Api;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -27,4 +28,21 @@ public class UserController {
         return userService.login(userLoginDTO);
     }
 
+    @PatchMapping("/update/{userId}")
+    public ResponseEntity<Void> updateProduct(@PathVariable Long userId, @RequestBody UserUpdateDTO updateDTO) {
+        userService.updateUser(userId, updateDTO);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/account")
+    public ResponseEntity<UserAccountDTO> getUserAccount(@RequestParam Long userId) {
+        UserAccountDTO userAccountDTO = userService.getUserAccount(userId);
+        return ResponseEntity.ok(userAccountDTO);
+    }
+
+    @GetMapping("/{userId}/stamps")
+    public ResponseEntity<List<Long>> getUserStamps(@PathVariable Long userId) {
+        List<Long> stamps = userService.getUserStamps(userId);
+        return ResponseEntity.ok(stamps);
+    }
 }

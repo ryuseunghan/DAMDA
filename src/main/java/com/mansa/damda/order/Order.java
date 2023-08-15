@@ -1,6 +1,7 @@
 package com.mansa.damda.order;
 
 import com.mansa.damda.product.Product;
+import com.mansa.damda.store.Store;
 import com.mansa.damda.user.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,12 +30,15 @@ public class Order {
     @Column(name = "order_price")
     private BigDecimal orderPrice;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 }

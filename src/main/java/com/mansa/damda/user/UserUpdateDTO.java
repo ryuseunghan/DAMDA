@@ -1,10 +1,9 @@
 package com.mansa.damda.user;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class UserSignupDTO {
+public class UserUpdateDTO {
     private String userNickName;
 
     private String userName;

@@ -10,6 +10,8 @@ public class ProductUpdateDTO {
 
     private BigDecimal price;
 
+    private String productDescription;
+
     private BigDecimal stockQuantity;
 
     private Long categoryId;

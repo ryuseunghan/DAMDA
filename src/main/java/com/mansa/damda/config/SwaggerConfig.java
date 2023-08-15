@@ -81,6 +81,17 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
+    @Bean
+    public Docket fineLocationApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("FineLocationAPI")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.mansa.damda.finelocaiton"))
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("DamdaSwagger")
