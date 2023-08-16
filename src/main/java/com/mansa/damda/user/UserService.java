@@ -3,12 +3,15 @@ package com.mansa.damda.user;
 
 import com.mansa.damda.market.MarketRepository;
 import com.mansa.damda.order.OrderRepository;
+import com.mansa.damda.store.Store;
 import com.mansa.damda.store.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -112,4 +115,10 @@ public class UserService {
         return user.getStamps();
     }
 
+    public Store getStoreByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("회원 id 오류"));
+        return storeRepository.findByUserUserId(user.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("해당 사용자의 가게를 찾을 수 없습니다."));
+    }
 }

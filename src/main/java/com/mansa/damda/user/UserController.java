@@ -3,6 +3,7 @@ package com.mansa.damda.user;
 
 import com.mansa.damda.order.PurchaseHistoryDTO;
 import com.mansa.damda.product.ProductUpdateDTO;
+import com.mansa.damda.store.Store;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,11 @@ public class UserController {
     public ResponseEntity<List<Long>> getUserStamps(@PathVariable Long userId) {
         List<Long> stamps = userService.getUserStamps(userId);
         return ResponseEntity.ok(stamps);
+    }
+
+    @GetMapping("/users/{userId}/store")
+    public ResponseEntity<Store> getStoreByUserId(@PathVariable Long userId) {
+        Store store = userService.getStoreByUserId(userId);
+        return ResponseEntity.ok(store);
     }
 }

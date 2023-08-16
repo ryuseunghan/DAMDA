@@ -92,4 +92,6 @@ public class StoreService {
                 .orElseThrow(() -> new IllegalArgumentException("가게 id 오류"));
     }
 
+
+
 }
