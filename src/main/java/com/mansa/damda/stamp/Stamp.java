@@ -16,7 +16,5 @@ public class Stamp {
     @Column(name = "stamp_id")
     private Long stampId;
 
-    @OneToOne
-    @JoinColumn(name = "market_id")
-    private Market market;
+
 }
