@@ -11,6 +11,8 @@ public class ProductRegisterDTO {
 
     private BigDecimal price;
 
+    private String productDescription;
+
     private BigDecimal stockQuantity;
 
     private Long storeId;

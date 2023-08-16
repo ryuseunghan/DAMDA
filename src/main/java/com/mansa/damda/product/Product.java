@@ -29,6 +29,9 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "product_description")
+    private String productDescription;
+
     @Column(name = "stock_quantity")
     private BigDecimal stockQuantity;
 
