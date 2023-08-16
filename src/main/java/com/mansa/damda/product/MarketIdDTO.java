@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class MarketIdDTO {
-    private String marketId;
+    private Long marketId;
 }
