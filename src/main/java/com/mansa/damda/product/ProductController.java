@@ -41,8 +41,8 @@ public class ProductController {
 
     @GetMapping("/lowest-stock")
     public ResponseEntity<List<Product>> getProductsByStockQuantityLowestFirst(
-            @RequestBody MarketIdDTO requestData) {
-        List<Product> products = productService.getProductsByStockQuantityLowestFirst(requestData);
+            @RequestParam(required = false) Long marketId) {
+        List<Product> products = productService.getProductsByStockQuantityLowestFirst(marketId);
         return ResponseEntity.ok(products);
     }
     @GetMapping("/{productId}")

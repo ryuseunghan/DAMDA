@@ -101,16 +101,16 @@ public class ProductService {
     }
 
     //인기 상품을 stockQuantity가 낮은 순으로
-    public List<Product> getProductsByStockQuantityLowestFirst(MarketIdDTO requestData) {
+    public List<Product> getProductsByStockQuantityLowestFirst(Long marketId) {
         Sort descendingSort = Sort.by(Sort.Direction.DESC, "stockQuantity");
         PageRequest pageRequest = PageRequest.of(0, 5, descendingSort);
 
         Specification<Product> spec = (root, query, criteriaBuilder) -> {
             query.orderBy(criteriaBuilder.desc(root.get("stockQuantity")));
 
-            if (requestData.getMarketId() != null) {
+            if (marketId != null) {
                 Join<Product, Market> marketJoin = root.join("market");
-                return criteriaBuilder.and(criteriaBuilder.equal(marketJoin.get("marketId"), requestData.getMarketId()));
+                return criteriaBuilder.and(criteriaBuilder.equal(marketJoin.get("marketId"), marketId));
             }
 
             return null;
