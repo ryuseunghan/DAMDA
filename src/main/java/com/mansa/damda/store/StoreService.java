@@ -33,7 +33,7 @@ public class StoreService {
         store.setStoreDescription(storeRegisterDTO.getStoreDescription());
         User user = userRepository.findById(storeRegisterDTO.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("유저 id 오류"));
-        if (user.getAccountName() != null) {
+        if (!user.getAccountName().equals("")) {
             throw new IllegalArgumentException("이미 등록 된 가게가 있습니다");
         }
         user.setAccountBank(storeRegisterDTO.getAccountBank());
