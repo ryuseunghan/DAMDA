@@ -15,8 +15,4 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     List<Store> findByCategoryCategoryIdAndMarketMarketId(Long categoryId, Long marketId);
     boolean existsByStoreName(String storeName);
     Optional<Store>  findByUserUserId(Long userId);
-
-    Optional<Store> findByUser(User user);
-
-
 }

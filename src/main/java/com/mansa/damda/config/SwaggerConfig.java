@@ -94,6 +94,17 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
+    @Bean
+    public Docket voiceRecognizationAPI() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("VoiceRecognizationAPI")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.mansa.damda.voicerecognition"))
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("DamdaSwagger")

@@ -3,10 +3,7 @@ package com.mansa.damda.voicerecognition;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -24,4 +21,12 @@ public class VoiceRecognitionController {
             String result = voiceRecognitionService.recognizeVoice(voiceFile);
             return ResponseEntity.ok(result);
     }
+
+
+    @PostMapping("/recognizing")
+    public ResponseEntity<VoiceRecognitionDTO> voiceRecognitionFunction(@RequestBody VoiceRecognitionInputDTO voiceRecognitionInputDTO){
+        VoiceRecognitionDTO result = voiceRecognitionService.voiceRecognitionFunction(voiceRecognitionInputDTO);
+        return ResponseEntity.ok(result);
+    }
+
 }

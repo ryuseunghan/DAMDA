@@ -1,5 +1,10 @@
 package com.mansa.damda.voicerecognition;
 
+import com.mansa.damda.product.ProductRepository;
+import com.mansa.damda.store.StoreRepository;
+import com.mansa.damda.user.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,7 +13,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Service
+@RequiredArgsConstructor
 public class VoiceRecognitionService {
+    private final StoreRepository storeRepository;
 
     public String recognizeVoice(MultipartFile voiceFile) {
         String clientId = "39x8q030yy";             // 발급받은 Client ID
@@ -27,7 +34,7 @@ public class VoiceRecognitionService {
             conn.setUseCaches(false);
             conn.setDoOutput(true);
             conn.setDoInput(true);
-            conn.setRequestMethod("POST");  // POST 메서드 사용
+            conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/octet-stream");
             conn.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
             conn.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
@@ -52,13 +59,91 @@ public class VoiceRecognitionService {
                 }
                 br.close();
                 return response.toString(); // 응답 문자열 반환
-            } else {  // 오류 발생
+            } else {
                 System.out.println("error responseCode= " + responseCode);
             }
         } catch (Exception e) {
-            System.out.println(e);
-            // 예외 처리
+           throw new IllegalArgumentException("음성 인식 오류");
         }
-        return null; // 처리 실패 시 null 반환
+        return null;
     }
+
+
+
+    public VoiceRecognitionDTO voiceRecognitionFunction(VoiceRecognitionInputDTO voiceRecognitionInputDTO){
+        VoiceRecognitionDTO voiceRecognitionDTO = new VoiceRecognitionDTO();
+        Long userId = voiceRecognitionInputDTO.getUserId();
+        String string = voiceRecognitionInputDTO.getSearchString();
+        int flag = 0;
+        switch(string){
+            case "내 가게": {
+                try{
+                    Long storeId = storeRepository.findByUserUserId(userId).orElseThrow(() -> new IllegalArgumentException("사용자의 가게를 찾을 수 없습니다.")).getStoreId();
+                    voiceRecognitionDTO.setStatusCode(0L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(storeId); //사용하기
+                    voiceRecognitionDTO.setSearchString(string);
+                    break;
+                }
+                catch(IllegalArgumentException e){
+                    voiceRecognitionDTO.setStatusCode(-1L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(null);
+                    voiceRecognitionDTO.setSearchString(string);
+                    break;
+                }
+            }
+            case "네 가게":{
+                try{
+                    Long storeId = storeRepository.findByUserUserId(userId).orElseThrow(() -> new IllegalArgumentException("사용자의 가게를 찾을 수 없습니다.")).getStoreId();
+                    voiceRecognitionDTO.setStatusCode(1L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(storeId); //사용하기
+                    voiceRecognitionDTO.setSearchString(string);
+                    break;
+                }
+                catch(IllegalArgumentException e){
+                    voiceRecognitionDTO.setStatusCode(-1L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(null);
+                    voiceRecognitionDTO.setSearchString(string);
+                    break;
+                }
+            }
+            case "마이페이지":{
+                voiceRecognitionDTO.setStatusCode(2L);
+                voiceRecognitionDTO.setUserId(userId);
+                voiceRecognitionDTO.setStoreId(null);
+                voiceRecognitionDTO.setSearchString(string);
+                break;
+            }
+            default:{
+                try{
+
+                    Long storeId = storeRepository.findByUserUserId(userId).orElseThrow(() -> new IllegalArgumentException("사용자의 가게를 찾을 수 없습니다.")).getStoreId();
+                    voiceRecognitionDTO.setStatusCode(3L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(storeId); //사용하기
+                    voiceRecognitionDTO.setSearchString(string);
+                }catch(IllegalArgumentException e){
+                    flag = 1;
+                    voiceRecognitionDTO.setStatusCode(-1L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(null); //사용하기
+                    voiceRecognitionDTO.setSearchString(string);
+                }
+                if(flag == 1) {
+                    voiceRecognitionDTO.setStatusCode(4L);
+                    voiceRecognitionDTO.setUserId(userId);
+                    voiceRecognitionDTO.setStoreId(null);
+                    voiceRecognitionDTO.setSearchString(string);//사용하기
+                }
+            }
+
+
+
+        }
+        return voiceRecognitionDTO;
+    }
+
 }
