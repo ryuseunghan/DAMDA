@@ -18,7 +18,7 @@ public class VoiceRecognitionService {
     private final StoreRepository storeRepository;
 
     public String recognizeVoice(MultipartFile voiceFile) {
-        String clientId = "39x8q030yy";             // 발급받은 Client ID
+        String clientId = "";             // 발급받은 Client ID
         String clientSecret = "";     // 발급받은 Client Secret
 
         try {
